@@ -312,10 +312,25 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
-}
+function isBracketsBalanced(str) {
+  const template = {
+    '[': ']',
+    '(': ')',
+    '{': '}',
+    '<': '>',
+  };
+  const stack = [];
 
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === template[stack[stack.length - 1]]) {
+      stack.pop();
+    } else {
+      stack.push(str[i]);
+    }
+  }
+
+  return !stack.length;
+}
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
  * representation of specified number.
